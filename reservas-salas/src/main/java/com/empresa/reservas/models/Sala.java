@@ -7,13 +7,22 @@ public class Sala {
 
     public Sala() {}
 
+ // Constructor para insertar una sala (sin ID)
+    public Sala(String nombre, int capacidad, String recursos) {
+        this.nombre = nombre;
+        this.capacidad = capacidad;
+        this.recursos = recursos;
+    }
+
+    // Constructor completo (para leer desde BD o actualizar)
     public Sala(int id, String nombre, int capacidad, String recursos) {
         this.id = id;
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.recursos = recursos;
     }
-    
+
+
     private String recursos;
 
     public String getRecursos() {
