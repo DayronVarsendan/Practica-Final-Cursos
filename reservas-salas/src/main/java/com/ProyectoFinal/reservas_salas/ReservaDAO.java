@@ -10,6 +10,34 @@ import java.util.List;
 
 public class ReservaDAO {
 
+	
+	public List<Reserva> listarReservas() {
+	    List<Reserva> reservas = new ArrayList<>();
+	    String sql = "SELECT * FROM reservas";
+
+	    try (Connection conn = ConexionBD.obtenerConexion();
+	         PreparedStatement stmt = conn.prepareStatement(sql);
+	         ResultSet rs = stmt.executeQuery()) {
+
+	        while (rs.next()) {
+	            Reserva reserva = new Reserva();
+	            reserva.setId(rs.getInt("id"));
+	            reserva.setEmpleadoId(rs.getInt("empleado_id"));
+	            reserva.setSalaId(rs.getInt("sala_id"));
+	            reserva.setFecha(rs.getDate("fecha").toLocalDate());
+	            reserva.setHoraInicio(rs.getTime("hora_inicio").toLocalTime());
+	            reserva.setHoraFin(rs.getTime("hora_fin").toLocalTime());
+
+	            reservas.add(reserva);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return reservas;
+	}
+
 	 // INSERTAR reserva con control de conflictos
     public void insertarReserva(Reserva reserva) {
         if (hayConflicto(reserva)) {
@@ -88,6 +116,8 @@ public class ReservaDAO {
         } catch (SQLException e) {
             System.err.println("❌ Error al eliminar reserva: " + e.getMessage());
         }
+        
+        
     }
     
 }

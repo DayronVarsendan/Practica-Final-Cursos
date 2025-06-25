@@ -3,9 +3,13 @@ package com.ProyectoFinal.reservas_salas;
 
 import com.empresa.reservas.models.Sala;
 import com.empresa.reservas.models.Empleado;
+import com.empresa.reservas.models.Reserva;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 
@@ -16,6 +20,7 @@ public class App {
     Scanner sc = new Scanner(System.in);
     SalaDAO salaDAO = new SalaDAO();
     EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+    ReservaDAO reservaDAO = new ReservaDAO();
 
     int opcionPrincipal;
 
@@ -23,6 +28,7 @@ public class App {
         System.out.println("\n===== MENÚ PRINCIPAL =====");
         System.out.println("1. Gestionar Salas");
         System.out.println("2. Gestionar Empleados");
+        System.out.println("3. Gestionar Reservas");
         System.out.println("0. Salir");
         System.out.print("Elige una opción: ");
         opcionPrincipal = sc.nextInt();
@@ -34,6 +40,9 @@ public class App {
                 break;
             case 2:
                 menuEmpleados(sc, empleadoDAO);
+                break;
+            case 3:
+                menuReservas(sc, reservaDAO);
                 break;
             case 0:
                 System.out.println("👋 Saliendo...");
@@ -146,6 +155,54 @@ public static void menuEmpleados(Scanner sc, EmpleadoDAO empleadoDAO) {
                 System.out.print("ID del empleado a eliminar: ");
                 int idEliminar = sc.nextInt();
                 empleadoDAO.eliminarEmpleado(idEliminar);
+                break;
+            case 0:
+                break;
+            default:
+                System.out.println("❌ Opción no válida.");
+        }
+    } while (opcion != 0);
+}
+
+// Submenú de RESERVAS
+public static void menuReservas(Scanner sc, ReservaDAO reservaDAO) {
+    int opcion;
+    do {
+        System.out.println("\n--- Gestión de Reservas ---");
+        System.out.println("1. Crear reserva");
+        System.out.println("2. Listar reservas");
+        System.out.println("3. Eliminar reserva");
+        System.out.println("0. Volver");
+        System.out.print("Elige una opción: ");
+        opcion = sc.nextInt();
+        sc.nextLine();
+
+        switch (opcion) {
+            case 1:
+                System.out.print("ID de empleado: ");
+                int empleadoId = sc.nextInt();
+                System.out.print("ID de sala: ");
+                int salaId = sc.nextInt();
+                sc.nextLine(); // limpiar buffer
+
+                System.out.print("Fecha (YYYY-MM-DD): ");
+                LocalDate fecha = LocalDate.parse(sc.nextLine());
+                System.out.print("Hora de inicio (HH:MM): ");
+                LocalTime inicio = LocalTime.parse(sc.nextLine());
+                System.out.print("Hora de fin (HH:MM): ");
+                LocalTime fin = LocalTime.parse(sc.nextLine());
+
+                Reserva nuevaReserva = new Reserva(0, empleadoId, salaId, fecha, inicio, fin);
+                reservaDAO.insertarReserva(nuevaReserva);
+                break;
+            case 2:
+                List<Reserva> reservas = reservaDAO.listarReservas();
+                reservas.forEach(System.out::println);
+                break;
+            case 3:
+                System.out.print("ID de la reserva a eliminar: ");
+                int idEliminar = sc.nextInt();
+                reservaDAO.eliminarReserva(idEliminar);
                 break;
             case 0:
                 break;
