@@ -8,7 +8,7 @@ public class ConexionBD {
     private static final String USER = "root";
     private static final String PASS = "1234";
 
-    public static Connection conectar() {
+    public static Connection obtenerConexion() {
         try {
             Connection conn = DriverManager.getConnection(URL, USER, PASS);
             System.out.println("✅ Conexión exitosa a la base de datos.");
