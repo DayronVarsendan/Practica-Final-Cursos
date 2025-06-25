@@ -10,13 +10,15 @@ public class SalaDAO {
 
     // INSERTAR una sala
     public void insertarSala(Sala sala) {
-        String sql = "INSERT INTO salas (nombre, capacidad) VALUES (?, ?)";
+    	String sql = "INSERT INTO salas (nombre, capacidad, recursos) VALUES (?, ?, ?)";
 
         try (Connection conn = ConexionBD.obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, sala.getNombre());
-            stmt.setInt(2, sala.getCapacidad());
+        	 stmt.setString(1, sala.getNombre());
+             stmt.setInt(2, sala.getCapacidad());
+             stmt.setString(3, sala.getRecursos());
+
             stmt.executeUpdate();
 
             System.out.println("✅ Sala insertada correctamente.");
@@ -36,11 +38,15 @@ public class SalaDAO {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Sala sala = new Sala(
-                    rs.getInt("id"),
-                    rs.getString("nombre"),
-                    rs.getInt("capacidad")
-                );
+            	
+            	Sala sala = new Sala(
+            	rs.getInt("id"),
+            	rs.getString("nombre"),
+            	rs.getInt("capacidad"),
+            	rs.getString("recursos")
+            	
+            		);
+            	
                 salas.add(sala);
             }
 
@@ -53,14 +59,15 @@ public class SalaDAO {
 
     // ACTUALIZAR una sala
     public void actualizarSala(Sala sala) {
-        String sql = "UPDATE salas SET nombre = ?, capacidad = ? WHERE id = ?";
+    	String sql = "UPDATE salas SET nombre = ?, capacidad = ?, recursos = ? WHERE id = ?";
 
         try (Connection conn = ConexionBD.obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, sala.getNombre());
-            stmt.setInt(2, sala.getCapacidad());
-            stmt.setInt(3, sala.getId());
+        	stmt.setString(1, sala.getNombre());
+        	stmt.setInt(2, sala.getCapacidad());
+        	stmt.setString(3, sala.getRecursos());
+        	stmt.setInt(4, sala.getId());
 
             int filas = stmt.executeUpdate();
             if (filas > 0) {
@@ -93,7 +100,5 @@ public class SalaDAO {
         } catch (SQLException e) {
             System.err.println("❌ Error al eliminar sala: " + e.getMessage());
         }
-        
-        
     }
 }

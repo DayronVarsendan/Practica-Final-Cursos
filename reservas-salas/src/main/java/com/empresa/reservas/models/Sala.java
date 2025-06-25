@@ -7,10 +7,21 @@ public class Sala {
 
     public Sala() {}
 
-    public Sala(int id, String nombre, int capacidad) {
+    public Sala(int id, String nombre, int capacidad, String recursos) {
         this.id = id;
         this.nombre = nombre;
         this.capacidad = capacidad;
+        this.recursos = recursos;
+    }
+    
+    private String recursos;
+
+    public String getRecursos() {
+        return recursos;
+    }
+
+    public void setRecursos(String recursos) {
+        this.recursos = recursos;
     }
 
     public int getId() { return id; }
