@@ -21,6 +21,9 @@ public class Reserva {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
     }
+    
+
+
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }

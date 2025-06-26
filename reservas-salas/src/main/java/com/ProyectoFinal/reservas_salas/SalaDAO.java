@@ -9,24 +9,25 @@ import java.util.List;
 public class SalaDAO {
 
     // INSERTAR una sala
-    public void insertarSala(Sala sala) {
-    	String sql = "INSERT INTO salas (nombre, capacidad, recursos) VALUES (?, ?, ?)";
+	public boolean insertarSala(Sala sala) {
+	    String sql = "INSERT INTO salas (nombre, capacidad, recursos) VALUES (?, ?, ?)";
 
-        try (Connection conn = ConexionBD.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+	    try (Connection conn = ConexionBD.obtenerConexion();
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        	 stmt.setString(1, sala.getNombre());
-             stmt.setInt(2, sala.getCapacidad());
-             stmt.setString(3, sala.getRecursos());
+	        stmt.setString(1, sala.getNombre());
+	        stmt.setInt(2, sala.getCapacidad());
+	        stmt.setString(3, sala.getRecursos());
 
-            stmt.executeUpdate();
+	        int filasAfectadas = stmt.executeUpdate();
+	        return filasAfectadas > 0;
 
-            System.out.println("✅ Sala insertada correctamente.");
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 
-        } catch (SQLException e) {
-            System.err.println("❌ Error al insertar sala: " + e.getMessage());
-        }
-    }
 
     // LISTAR todas las salas
     public List<Sala> listarSalas() {
