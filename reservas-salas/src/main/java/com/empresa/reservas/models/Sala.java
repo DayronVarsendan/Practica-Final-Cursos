@@ -1,5 +1,7 @@
 package com.empresa.reservas.models;
 
+import java.sql.Connection;
+
 public class Sala {
     private int id;
     private String nombre;
@@ -44,6 +46,6 @@ public class Sala {
 
     @Override
     public String toString() {
-        return "Sala [id=" + id + ", nombre=" + nombre + ", capacidad=" + capacidad + "]";
+        return "Sala [id=" + id + ", nombre=" + nombre + ", capacidad=" + capacidad + ", recursos=" + recursos + "]";
     }
 }

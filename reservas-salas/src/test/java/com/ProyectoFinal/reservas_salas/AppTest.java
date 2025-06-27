@@ -18,7 +18,6 @@ public class AppTest {
 
     @BeforeEach
     public void setUp() {
-        ConexionBD.obtenerConexion(); 
         salaDAO = new SalaDAO();
         empleadoDAO = new EmpleadoDAO();
         reservaDAO = new ReservaDAO();
@@ -28,7 +27,7 @@ public class AppTest {
     @Test
     public void testInsertarSala() {
         Sala sala = new Sala("Sala Test", 10, "Proyector");
-        salaDAO.insertarSala(sala); 
+        salaDAO.insertarSala(sala); // No capturamos nada porque es void
     }
 
     @Test
