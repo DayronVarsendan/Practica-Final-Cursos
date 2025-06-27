@@ -1,11 +1,13 @@
 package com.empresa.reservas.models;
 
-import java.sql.Connection;
 
 public class Sala {
-    private int id;
-    private String nombre;
-    private int capacidad;
+	
+	private int id;// ID único de la sala (clave primaria en la BD)
+    private String nombre;// Nombre de la sala
+    private int capacidad;// Capacidad máxima de personas
+    private String recursos;// Recursos disponibles en la sala
+
 
     public Sala() {}
 
@@ -25,8 +27,7 @@ public class Sala {
     }
 
 
-    private String recursos;
-
+    // Getters y setters para cada campo
     public String getRecursos() {
         return recursos;
     }
@@ -43,7 +44,8 @@ public class Sala {
 
     public int getCapacidad() { return capacidad; }
     public void setCapacidad(int capacidad) { this.capacidad = capacidad; }
-
+    
+    // Representación en forma de texto de una sala, útil para impresión
     @Override
     public String toString() {
         return "Sala [id=" + id + ", nombre=" + nombre + ", capacidad=" + capacidad + ", recursos=" + recursos + "]";

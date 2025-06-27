@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SalaDAO {
 
-    // INSERTAR una sala
+    // Método para insertar una nueva sala en la base de datos
 	public boolean insertarSala(Sala sala) {
 	    String sql = "INSERT INTO salas (nombre, capacidad, recursos) VALUES (?, ?, ?)";
 
@@ -23,7 +23,7 @@ public class SalaDAO {
 	        return filasAfectadas > 0;
 
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        e.printStackTrace(); // Imprime el error en consola
 	        return false;
 	    }
 	}

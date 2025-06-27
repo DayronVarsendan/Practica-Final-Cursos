@@ -4,15 +4,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Reserva {
+    // Atributos de la reserva
+
     private int id;
     private int empleadoId;
     private int salaId;
     private LocalDate fecha;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-
+    
+    // Constructor vacío necesario para ciertas operaciones como deserialización
     public Reserva() {}
-
+    
+    // Constructor completo para crear una reserva con todos los campos
     public Reserva(int id, int empleadoId, int salaId, LocalDate fecha, LocalTime horaInicio, LocalTime horaFin) {
         this.id = id;
         this.empleadoId = empleadoId;
@@ -24,6 +28,7 @@ public class Reserva {
     
 
 
+    // Getters y setters para todos los campos
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -42,7 +47,8 @@ public class Reserva {
 
     public LocalTime getHoraFin() { return horaFin; }
     public void setHoraFin(LocalTime horaFin) { this.horaFin = horaFin; }
-
+    
+    // Método toString para representar la reserva como cadena (útil para impresión por consola)
     @Override
     public String toString() {
         return "Reserva [id=" + id + ", empleadoId=" + empleadoId + ", salaId=" + salaId +
