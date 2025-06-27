@@ -84,7 +84,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 INSERT INTO salas (nombre, capacidad, recursos) VALUES
 ('Sala A', 10, 'Proyector, Pizarra'),
-('Sala B', 20, Micrófono, Pizarra'),
+('Sala B', 20, 'Micrófono, Pizarra'),
 ('Sala C', 5, 'Proyector'),
 ('Sala D', 8, 'Pizarra'),
 ('Sala E', 12, 'Proyector, Televisión, Micrófono');
